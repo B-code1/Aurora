@@ -3,6 +3,7 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
+import { SavedMoviesProvider } from '../contexts/SavedMoviesContext';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -18,6 +19,9 @@ export default function RootLayout() {
   }
 
   return (
+    <SavedMoviesProvider>
+      {/* Wrap the entire app in the SavedMoviesProvider to provide context */}
+    
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -27,5 +31,7 @@ export default function RootLayout() {
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
+    </SavedMoviesProvider>
+    
   );
 }
